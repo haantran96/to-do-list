@@ -9,7 +9,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks : [] //id, task_name,status
+            tasks : [], //id, task_name,status
+            isDisPlayForm: true
         }
     }
 
@@ -30,11 +31,11 @@ class App extends Component {
             },        
             {   id :this.generateID(),
                 name : 'Learn Redux',
-                status: true
+                status: false
             },        
             {   id :this.generateID(),
                 name : 'Learn API',
-                status: true
+                status: false
             },        
         ];
         this.setState({
@@ -53,10 +54,16 @@ class App extends Component {
         + this.s4() + '-'+ this.s4() + '-'
         + this.s4() + '-'+ this.s4() + '-';
     }
+    onToggleForm = () => {
+        this.setState({
+            isDisPlayForm : !this.state.isDisPlayForm
+        })
+    }
 
     
     render() {
-        var { tasks } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisPlayForm } = this.state; // var tasks = this.state.tasks
+        var elmTaskForm = isDisPlayForm ? <TaskForm /> : '';
         return (
         <div className="container">
             <div className="text-center">
@@ -64,12 +71,16 @@ class App extends Component {
                 <hr/>
             </div>
             <div className="row">
-                <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div className= {isDisPlayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4": ""}>
                     {/* TaskForm*/}
-                    <TaskForm/>
+                    {elmTaskForm}
                 </div>
-                <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                    <button type="button" className="btn btn-primary">
+                <div className={isDisPlayForm ? "col-xs-8 col-sm-8 col-md-8 col-lg-8" :
+                                    "col-xs-12 col-sm-12 col-md-12 col-lg-12" }>
+                    <button 
+                        type="button" 
+                        className="btn btn-primary"
+                        onClick={this.onToggleForm}>
                         <span className="fa fa-plus mr-5"></span>Add Task
                     </button>
 
