@@ -28,7 +28,13 @@ class TaskForm extends Component {
                     name: nextprops.task.name,
                     status:nextprops.task.status
                 });
+        } else if (nextprops && nextprops.task === null) {
+            this.setState({
+                id : '',
+                name : '',
+                status : false
     
+            });
         }
 
     }

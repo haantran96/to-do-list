@@ -35,9 +35,19 @@ class App extends Component {
         + this.s4() + '-'+ this.s4() + '-';
     }
     onToggleForm = () => {
-        this.setState({
-            isDisPlayForm : !this.state.isDisPlayForm
-        });
+
+        if (this.state.isDisPlayForm && this.state.taskEditing !== null) {
+            this.setState({
+                isDisPlayForm : true,
+                taskEditing : null
+            });
+
+        } else {
+            this.setState({
+                isDisPlayForm : !this.state.isDisPlayForm,
+                taskEditing : null
+            });
+        }
     }
 
     onCloseForm = () => {
