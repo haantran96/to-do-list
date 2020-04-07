@@ -44,5 +44,22 @@
   margin-right: 15px;
 }
 .ml-15 {
-  margin-right: 15px;
+  margin-left: 15px;
 }
+.text-right {
+  float: right;
+  cursor: pointer;
+}
+.text-right:hover{
+  color:red;
+}
+
+.sort_selected::after {
+  content: '\f00c';
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  margin: 0px 0px 0px 10px;
+  display: inline-block;
+}
+
