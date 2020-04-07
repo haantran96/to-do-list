@@ -3,14 +3,17 @@ import React, {Component} from 'react';
 class TaskItem extends Component {
 
   render() {
+    var {tasks, index} = this.props;
+    console.log(tasks.status);
+
     return (
         <tr>
-            <td>1</td>
-            <td>Learn ReactJS</td>
+            <td>{index+1}</td>
+            <td>{tasks.name}</td>
             <td className="text-center">
-                <span className="label label-success">
-                            Finished
-                        </span>
+                <span className={ tasks.status === true ? 'label label-success':
+                'label label-danger'}>{tasks.status === true ? 'Finished' : 'Unfinished'}
+                </span>
             </td>
             <td className="text-center">
                 <button type="button" className="btn btn-warning">
