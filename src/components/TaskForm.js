@@ -21,6 +21,18 @@ class TaskForm extends Component {
         }
     }
 
+    componentWillReceiveProps (nextprops) {
+        if (nextprops && nextprops.task) {
+                this.setState({
+                    id: nextprops.task.id,
+                    name: nextprops.task.name,
+                    status:nextprops.task.status
+                });
+    
+        }
+
+    }
+
    onCloseForm = () => {
        this.props.onCloseForm();
    }
