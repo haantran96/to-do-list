@@ -192,8 +192,8 @@ class App extends Component {
         }
         if (sortBy === 'name') {
             tasks.sort((a,b) => {
-                if (a.name > b.name) return sortValue;
-                else if (a.name < b.name) return -sortValue;
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return sortValue;
+                else if (a.name.toLowerCase() < b.name.toLowerCase()) return -sortValue;
                 else return 0;
             });
         } else {
