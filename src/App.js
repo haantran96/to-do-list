@@ -15,7 +15,8 @@ class App extends Component {
             filter : {
                 name : '',
                 status : -1
-            }
+            },
+            keyword : '',
         }
     }
 
@@ -108,6 +109,11 @@ class App extends Component {
         return result;
     }
 
+    findName = (name) => {
+        var {tasks} = this.state;
+        var result = -1;
+    }
+
     onDelete = (id) => {
         var {tasks} = this.state;
         var index = this.findIndex(id);
@@ -143,8 +149,14 @@ class App extends Component {
         });
     }
 
+    onSearch = (keyword) => {
+        this.setState ({
+            keyword: keyword.toLowerCase()
+        })
+    }
+
     render() {
-        var { tasks, isDisPlayForm, taskEditing, filter } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisPlayForm, taskEditing, filter, keyword } = this.state; // var tasks = this.state.tasks
         if (filter) {
             if (filter.name) {
                 tasks =  tasks.filter((task) => {
@@ -152,13 +164,20 @@ class App extends Component {
                 });
             }
             tasks = tasks.filter((task) => {
-                if (filter.status == -1) {
+                if (filter.status === -1) {
                     return task;
                 } else {
                     return task.status === (filter.status === 1 ? true:false);
                 }
             });
             
+        }
+
+        if (keyword) {
+            tasks =  tasks.filter((task) => {
+                return task.name.toLowerCase().indexOf(keyword) !== -1;
+            });
+
         }
         
         var elmTaskForm = isDisPlayForm 
@@ -188,7 +207,7 @@ class App extends Component {
                     
                     {/* Search and Sort*/}
 
-                    <Control/>
+                    <Control onSearch={this.onSearch}/>
                     <div className="row mt-15">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <TaskList tasks = {tasks}
