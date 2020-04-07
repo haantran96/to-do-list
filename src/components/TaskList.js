@@ -10,7 +10,8 @@ class TaskList extends Component {
                         index={index} 
                         tasks = {task}
                         onUpdateStatus ={this.props.onUpdateStatus}
-                        onDelete = {this.props.onDelete}/>
+                        onDelete = {this.props.onDelete}
+                        onUpdate = {this.props.onUpdate}/>
     })
     return (
         <table className="table table-bordered table-hover mt-15">
