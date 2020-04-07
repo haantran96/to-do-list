@@ -4,7 +4,6 @@ class TaskItem extends Component {
 
   render() {
     var {tasks, index} = this.props;
-    console.log(tasks.status);
 
     return (
         <tr>
