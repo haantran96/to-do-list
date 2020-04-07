@@ -11,7 +11,11 @@ class App extends Component {
         this.state = {
             tasks : [], //id, task_name,status
             isDisPlayForm: true,
-            taskEditing : null
+            taskEditing : null,
+            filter : {
+                name : '',
+                status : -1
+            }
         }
     }
 
@@ -129,8 +133,34 @@ class App extends Component {
 
     }
 
+    onFilter = (filterName, filterStatus) => {
+        filterStatus = parseInt(filterStatus,10);
+        this.setState( {
+            filter: {
+                name: filterName.toLowerCase(),
+                status : filterStatus
+            }
+        });
+    }
+
     render() {
-        var { tasks, isDisPlayForm, taskEditing } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisPlayForm, taskEditing, filter } = this.state; // var tasks = this.state.tasks
+        if (filter) {
+            if (filter.name) {
+                tasks =  tasks.filter((task) => {
+                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
+                });
+            }
+            tasks = tasks.filter((task) => {
+                if (filter.status == -1) {
+                    return task;
+                } else {
+                    return task.status === (filter.status === 1 ? true:false);
+                }
+            });
+            
+        }
+        
         var elmTaskForm = isDisPlayForm 
             ? <TaskForm onSubmit={this.onSubmit} 
                         onCloseForm={this.onCloseForm}
@@ -164,7 +194,8 @@ class App extends Component {
                             <TaskList tasks = {tasks}
                                     onUpdateStatus={this.onUpdateStatus}
                                     onDelete = {this.onDelete}
-                                    onUpdate = {this.onUpdate}/>
+                                    onUpdate = {this.onUpdate}
+                                    onFilter = {this.onFilter} />
                         </div>
                     </div>
                 </div>
