@@ -17,6 +17,8 @@ class App extends Component {
                 status : -1
             },
             keyword : '',
+            sortBy : 'name',
+            sortValue : 1
         }
     }
 
@@ -152,11 +154,20 @@ class App extends Component {
     onSearch = (keyword) => {
         this.setState ({
             keyword: keyword.toLowerCase()
-        })
+        });
+    }
+
+    onSort = (sortBy, sortValue) => {
+        this.setState({
+           sortBy: sortBy,
+           sortValue: sortValue,
+        });
     }
 
     render() {
-        var { tasks, isDisPlayForm, taskEditing, filter, keyword } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisPlayForm, 
+            taskEditing, filter, 
+            keyword, sortBy, sortValue } = this.state; // var tasks = this.state.tasks
         if (filter) {
             if (filter.name) {
                 tasks =  tasks.filter((task) => {
@@ -179,7 +190,17 @@ class App extends Component {
             });
 
         }
-        
+        if (sortBy === 'name') {
+            tasks.sort((a,b) => {
+                if (a.name > b.name) return sortValue;
+                else if (a.name < b.name) return -sortValue;
+                else return 0;
+            });
+        } else {
+            tasks = tasks.filter((task) => {
+                return task.status === (sortValue === 1 ? true:false);
+            });
+        }
         var elmTaskForm = isDisPlayForm 
             ? <TaskForm onSubmit={this.onSubmit} 
                         onCloseForm={this.onCloseForm}
@@ -207,7 +228,10 @@ class App extends Component {
                     
                     {/* Search and Sort*/}
 
-                    <Control onSearch={this.onSearch}/>
+                    <Control onSearch={this.onSearch}
+                            onSort = {this.onSort}
+                            sortBy= {sortBy}
+                            sortValue= {sortValue}/>
                     <div className="row mt-15">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <TaskList tasks = {tasks}
