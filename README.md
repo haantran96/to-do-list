@@ -8,4 +8,4 @@ Online demo: https://cranky-yalow-4c8014.netlify.com/
 - Local storage (when you refresh, the tasks are still saved and do not disappear)
 
 # Demo: 
-<iframe src='https://gfycat.com/ifr/LoathsomePassionateCoqui' frameborder='0' scrolling='no' allowfullscreen width='640' height='404'></iframe>
+![](https://media.giphy.com/media/QWcvzzLCaCCfibYpQI/giphy.gif)
